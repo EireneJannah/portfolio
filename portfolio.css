@@ -5,6 +5,12 @@
 #navbarNav {
     margin-left: 100px;
 }
+.navbar-toggler {
+    border-color: #695141;
+}
+.navbar-toggler-icon {
+    filter: invert(27%) sepia(30%) saturate(500%) hue-rotate(10deg);
+}
 .nav-link {
     color: #63391E !important;
     font-style: bold !important;
@@ -336,6 +342,132 @@ summary:hover {
 .card-text {
     flex-grow: 1;
 }
+
+/*RESPONSIVE
+
+/* TABLET/IPAD */
+@media (max-width: 992px) {
+
+#navbarNav {
+    margin-left: 0;
+}  
+.navbar-nav {
+    gap: 10px;
+    padding-top: 10px;
+}
+.intro-container {
+    flex-direction: column;
+    padding: 40px 40px;
+    text-align: center;
+}
+#intro {
+    max-width: 100%;
+    padding-left: 0;
+}
+.intro-pic img {
+    width: 350px;
+    margin-right: 0;
+}
+.intro-btn {
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.proj-title {
+    padding-left: 40px;
+    text-align: left;
+}
+.proj-card {
+    flex-direction: column;
+    margin: 0 40px;
+    padding: 30px;
+}
+.btn-more-proj {
+    margin-left: 40px;
+}
+#about {
+    flex-direction: column;
+    padding: 40px;
+    gap: 40px;
+}
+.abt-title,
+.skills-title {
+    margin-left: 0;
+}
+.abt-pr {
+    margin-left: 0;
+}
+.skills-details {
+    flex-direction: column;
+    gap: 20px;
+}
+details {
+    margin-left: 0;
+    width: 100%;
+}
+.carousel {
+    margin: 0 auto 30px auto;
+}
+}
+
+/* MOBILE */
+@media (max-width: 576px) {
+
+#navbarNav {
+    margin-left: 0;
+}
+.navbar-nav {
+        gap: 10px;
+        padding-top: 10px;
+}
+.nav-link {
+    font-size: 18px;
+}
+.name-intro {
+    font-size: 45px;
+}
+.hey-bg {
+    font-size: 16px;
+}
+.intro-pic img {
+    width: 280px;
+}
+.proj-title {
+    font-size: 32px;
+    padding-left: 20px;
+}
+.proj-text {
+    font-size: 18px;
+}
+.proj-card {
+    margin: 0 20px;
+}
+.btn-more-proj {
+    margin-left: 20px;
+}
+.abt-title,
+.educ-title,
+.train-title,
+.skills-title {
+    font-size: 32px;
+}
+.abt-pr,
+.educ-details,
+.train-details {
+    font-size: 18px;
+}
+.contacts {
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.carousel-item {
+    height: 300px;
+}
+.carousel-caption {
+    width: 90%;
+}
+}
+
+
 
 
 
