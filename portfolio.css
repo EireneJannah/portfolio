@@ -1,6 +1,17 @@
+/* Spacing tokens: shrink at each breakpoint instead of using fixed pixel values */
+:root {
+    --gutter: 140px;   /* side margin for project cards / titles */
+    --pad-x: 120px;    /* side padding for intro + about */
+}
+
+html {
+    scroll-behavior: smooth;
+}
 * {
     background-color: #FFF8F2;
-    scroll-behavior: smooth;
+}
+img {
+    max-width: 100%;
 }
 #navbarNav {
     margin-left: 100px;
@@ -13,7 +24,7 @@
 }
 .nav-link {
     color: #63391E !important;
-    font-style: bold !important;
+    font-weight: bold;
     font-family: 'Work Sans';
     font-size: 20px;
 }
@@ -24,9 +35,6 @@
   display: none;
   border-radius: 100px;
 }
-.fas fa-arrow-up {
-    color: #FFF8F2;
-}
 
 /*HOME*/
 .intro-container {
@@ -34,13 +42,14 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 40px 120px;
+    padding: 40px var(--pad-x);
     gap: 60px;
 }
 #intro {
     display: flex;
     flex-direction: column;
     max-width: 55%;
+    min-width: 0;
     padding-left: 40px;
 }
 .hey-bg {
@@ -56,12 +65,14 @@
 .name-intro {
     font-family: 'Ecszar';
     color: #63391E;
-    font-size: 45px;
+    font-size: clamp(30px, 5vw, 45px);
     line-height: 1.2;
 }
 .intro-pic {
     position: relative;
-    width: 470px;
+    flex: 0 1 470px;
+    width: 100%;
+    max-width: 470px;
     margin-right: 40px;
 }
 .profile-img {
@@ -86,6 +97,7 @@
 }
 .intro-btn {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     margin-top: 20px;
 }
@@ -109,6 +121,18 @@
     color: #695141;
     border: 2px solid #695141;
 }
+/* Bootstrap 5 resets background/border on .btn:hover; keep the original look */
+.btn.primary:hover,
+.btn.primary:active,
+.btn.primary:focus-visible {
+    background-color: #695141;
+}
+.btn.secondary:hover,
+.btn.secondary:active,
+.btn.secondary:focus-visible {
+    background-color: transparent;
+    border-color: #695141;
+}
 
 /*PROJECTS*/
 #projects {
@@ -120,7 +144,7 @@
     font-family: 'Ecszar';
     color: #63391E;
     font-size: 40px;
-    padding: 30px 0 40px 150px;
+    padding: 30px 0 40px calc(var(--gutter) + 10px);
     font-weight: bolder;
 }
 .proj-card {
@@ -131,11 +155,12 @@
   border-radius: 20px;
   padding: 0 0 0 50px;
   gap: 20px;
-  margin: 0 140px 0 140px;
+  margin: 0 var(--gutter);
   overflow: hidden;
 }
 .proj-text {
   flex: 1;
+  min-width: 0;
   font-weight: bold;
   font-size: 20px;
 }
@@ -158,11 +183,13 @@
 }
 .proj-image {
   flex: 1;
+  min-width: 0;
   display: flex;
   justify-content: center;
 }
 .proj-image img {
   width: 100%;
+  height: auto;
   border-radius: 20px;
 }
 .btn-more-proj {
@@ -174,8 +201,9 @@
     font-weight: bold;
     background-color: #695141;
     color: #FFF8F2;
+    text-decoration: none;
     margin-top: 40px;
-    margin-left: 140px;
+    margin-left: var(--gutter);
     display: inline-block;
 }
 .btn-more-proj:hover{
@@ -186,14 +214,16 @@
 #about {
     display: flex;
     gap: 80px;
-    padding: 40px 120px;
+    padding: 40px var(--pad-x);
     align-items: flex-start;
 }
-.about-info {
+.abt-info {
     flex: 2;
+    min-width: 0;
 }
 .educ {
     flex: 1;
+    min-width: 0;
 }
 .abt-title {
     margin-left: 40px;
@@ -243,6 +273,8 @@
 .skills-details {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px 0;
     align-items: flex-start;
 }
 details {
@@ -282,10 +314,11 @@ summary:hover {
 .contacts {
     margin: 15px 0 0 30px;
     display: flex;
+    flex-wrap: wrap;
     gap: 35px;
 }
 
-/**CERTIFICATES*/
+/*CERTIFICATES*/
 #certificates {
     background-color: #EBC490;
     padding: 50px 20px;
@@ -300,11 +333,12 @@ summary:hover {
     text-align: center;
 }
 .carousel {
+    width: 100%;
     max-width: 630px;
-    margin: 0 0 30px 420px;
+    margin: 0 auto 30px auto;
 }
 .carousel-item {
-    height: 400px;
+    height: clamp(240px, 62vw, 400px);
 }
 .carousel-item img {
     height: 100%;
@@ -342,14 +376,19 @@ summary:hover {
     overflow: hidden;
 }
 
-/*MORE PROJECTS*/
+/*MORE PROJECTS PAGE*/
 .card {
     height: 100%;
+}
+.card-img-top {
+    width: 100%;
+    height: 225px;
+    object-fit: cover;
 }
 .card-body {
     display: flex;
     flex-direction: column;
-    width: 100%; 
+    width: 100%;
     height: 100%;
 }
 .card-title{
@@ -363,50 +402,87 @@ summary:hover {
 }
 
 /*RESPONSIVE
+   Breakpoints: 1200 (small laptop), 992 (tablet, matches Bootstrap's navbar-expand-lg),
+   576 (phone) */
+
+/* SMALL LAPTOP */
+@media (max-width: 1199.98px) {
+:root {
+    --gutter: 80px;
+    --pad-x: 60px;
+}
+.intro-container {
+    gap: 40px;
+}
+#about {
+    gap: 40px;
+}
+.proj-card {
+    padding-left: 40px;
+}
+}
 
 /* TABLET/IPAD */
-@media (max-width: 992px) {
-
+@media (max-width: 991.98px) {
+:root {
+    --gutter: 40px;
+    --pad-x: 40px;
+}
 #navbarNav {
     margin-left: 0;
-}  
+}
 .navbar-nav {
     gap: 10px;
     padding-top: 10px;
 }
 .intro-container {
     flex-direction: column;
-    padding: 40px 40px;
     text-align: center;
 }
 #intro {
+    align-items: center;
     max-width: 100%;
     padding-left: 0;
 }
-.intro-pic img {
-    width: 350px;
-    margin-right: 0;
+#intro > br {
+    display: none;
+}
+.intro-pic {
+    flex: none;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
 }
 .intro-btn {
     justify-content: center;
-    flex-wrap: wrap;
+}
+.contacts {
+    justify-content: center;
+    margin-left: 0;
 }
 .proj-title {
-    padding-left: 40px;
+    padding-left: var(--gutter);
     text-align: left;
 }
 .proj-card {
     flex-direction: column;
-    margin: 0 40px;
+    align-items: stretch;
     padding: 30px;
 }
-.btn-more-proj {
-    margin-left: 40px;
+.proj-text,
+.proj-image {
+    flex: none;
+    width: 100%;
 }
 #about {
     flex-direction: column;
-    padding: 40px;
+    align-items: stretch;
     gap: 40px;
+}
+.abt-info,
+.educ {
+    flex: none;
+    width: 100%;
 }
 .abt-title,
 .skills-title {
@@ -414,6 +490,7 @@ summary:hover {
 }
 .abt-pr {
     margin-left: 0;
+    max-width: 100%;
 }
 .skills-details {
     flex-direction: column;
@@ -423,45 +500,40 @@ details {
     margin-left: 0;
     width: 100%;
 }
-.carousel {
-    margin: 0 auto 30px auto;
-}
 }
 
 /* MOBILE */
-@media (max-width: 576px) {
-
-#navbarNav {
-    margin-left: 0;
-}
-.navbar-nav {
-        gap: 10px;
-        padding-top: 10px;
+@media (max-width: 575.98px) {
+:root {
+    --gutter: 20px;
+    --pad-x: 20px;
 }
 .nav-link {
     font-size: 18px;
 }
-.name-intro {
-    font-size: 45px;
-}
 .hey-bg {
     font-size: 16px;
+    margin-bottom: 24px;
 }
-.intro-pic img {
-    width: 280px;
+.intro-pic {
+    max-width: 280px;
 }
-.proj-title {
+.btn {
+    font-size: 16px;
+    padding: 12px 18px;
+}
+.proj-title,
+.cert-title {
     font-size: 32px;
-    padding-left: 20px;
 }
 .proj-text {
     font-size: 18px;
 }
-.proj-card {
-    margin: 0 20px;
+.proj-text h2 {
+    font-size: 26px;
 }
-.btn-more-proj {
-    margin-left: 20px;
+.proj-card {
+    padding: 20px;
 }
 .abt-title,
 .educ-title,
@@ -475,19 +547,16 @@ details {
     font-size: 18px;
 }
 .contacts {
-    flex-wrap: wrap;
     gap: 20px;
 }
-.carousel-item {
-    height: 300px;
+#projects,
+#certificates {
+    padding-left: 12px;
+    padding-right: 12px;
 }
-.carousel-caption {
-    width: 90%;
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 1.5rem;
+    height: 1.5rem;
 }
 }
-
-
-
-
-
-
